@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Olimpiadas Familiares 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800;900&display=swap">
+<style>
+/* Layout: hoja de mando del día. Marcador arriba, el programa como pista vertical de horas
+   con "ahora" marcado, fichas de prueba numeradas por orden de juego y listas de preparativos. */
+:root{
+  --bg:#F2F5F0; --surface:#FFFFFF; --ink:#15201A; --muted:#56645B; --line:#D5DCD2;
+  --gold:#9A6C05; --gold-soft:#F5E9CB;
+  --rojo:#C9322A; --azul:#2257BF; --verde:#1F7A45;
+  --on-team:#FFFFFF;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1410; --surface:#161F19; --ink:#E6ECE4; --muted:#9BA89F; --line:#2A362E;
+    --gold:#E4B640; --gold-soft:#3A2F14;
+    --rojo:#EE6A5E; --azul:#6E9CF2; --verde:#5CC07E;
+    --on-team:#0E1410;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1410; --surface:#161F19; --ink:#E6ECE4; --muted:#9BA89F; --line:#2A362E;
+  --gold:#E4B640; --gold-soft:#3A2F14;
+  --rojo:#EE6A5E; --azul:#6E9CF2; --verde:#5CC07E;
+  --on-team:#0E1410;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1;margin:0;text-wrap:balance}
+h2{font-size:clamp(2.2rem,6vw,3.2rem);font-weight:900;text-transform:uppercase;letter-spacing:.01em}
+h3{font-size:1.5rem;font-weight:800;letter-spacing:.01em}
+p{margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible,label:focus-within{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Cabecera */
+.hero{padding-block:36px 0}
+.hero .wrap{display:grid;gap:16px}
+.hero h1{font-size:clamp(3.4rem,12vw,7rem);font-weight:900;text-transform:uppercase;line-height:.86}
+.hero h1 span{color:var(--gold)}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.facts li{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.95rem}
+.facts b{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:.02em;margin-right:4px}
+.now-box{background:var(--ink);color:var(--bg);border-radius:14px;padding:14px 18px;display:grid;gap:2px}
+.now-box .eyebrow{color:inherit;opacity:.7}
+.now-box strong{font-family:var(--display);font-weight:900;font-size:1.9rem;line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
+.now-box span{opacity:.85}
+.lanes{margin-top:28px;display:grid}
+.lane{height:34px;display:flex;align-items:center;gap:12px;color:var(--on-team);font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;
+  background-image:repeating-linear-gradient(90deg,transparent 0 46px,color-mix(in srgb,var(--on-team) 55%,transparent) 46px 70px);
+  background-size:100% 2px;background-repeat:no-repeat;background-position:0 100%;
+  padding-left:max(16px,env(safe-area-inset-left,0px))}
+.lane b{display:inline-grid;place-items:center;width:24px;height:24px;border:2px solid var(--on-team);border-radius:50%;font-size:.95rem}
+.lane.r{background-color:var(--rojo)} .lane.a{background-color:var(--azul)}
+
+/* Navegación */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.top ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.top a{display:block;padding:14px 12px;font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--muted);white-space:nowrap}
+nav.top a:hover{color:var(--ink)}
+
+section{padding-block:52px 8px}
+.sec-head{display:grid;gap:10px;margin-bottom:24px}
+.sec-head p{color:var(--muted);max-width:62ch}
+
+/* Marcador */
+.board{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.side{border-radius:14px;padding:16px 18px;color:var(--on-team);display:grid;gap:2px;align-content:start}
+.side.t1{background:var(--rojo)} .side.t2{background:var(--azul)}
+.side .eyebrow{color:inherit;opacity:.85}
+.side b{font-family:var(--display);font-weight:900;font-size:clamp(4.2rem,15vw,6.8rem);line-height:.85;font-variant-numeric:tabular-nums}
+.side small{font-size:.85rem;opacity:.9}
+.board-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;margin:14px 0 6px;color:var(--muted);font-size:.95rem}
+.board-meta strong{color:var(--ink)}
+.pill{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.pill.ok{border-color:transparent;background:var(--gold-soft);color:var(--ink)}
+.results{list-style:none;margin:0;padding:0}
+.res-row{display:grid;grid-template-columns:2.4rem minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.res-row .n{font-family:var(--display);font-weight:900;font-size:1.7rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.res-row .what{display:grid;min-width:0}
+.res-row .what b{font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:.01em}
+.res-row .what small{color:var(--muted);font-size:.85rem}
+.res-row.final .n,.res-row.final .what b{color:var(--gold)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.seg button{font:700 .92rem var(--body);padding:8px 14px;min-height:42px;background:transparent;color:var(--ink);border:0;cursor:pointer;white-space:nowrap}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[data-team="1"][aria-pressed="true"]{background:var(--rojo);color:var(--on-team)}
+.seg button[data-team="2"][aria-pressed="true"]{background:var(--azul);color:var(--on-team)}
+.seg button:disabled{cursor:default}
+.hint{color:var(--muted);font-size:.9rem;margin-top:12px}
+
+/* Programa */
+ol.day{list-style:none;margin:0;padding:0}
+.slot{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:14px 10px;border-top:1px solid var(--line);border-radius:0}
+.slot:first-child{border-top:0}
+.slot time{font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:1.05;font-variant-numeric:tabular-nums}
+.slot-body{display:grid;gap:6px;min-width:0}
+.slot-body h3{font-size:1.35rem}
+.slot-body p{color:var(--muted)}
+.slot.final time,.slot.final h3{color:var(--gold)}
+.slot.meal{background:var(--surface)}
+.slot.is-now{background:var(--gold-soft);border-radius:12px;border-top-color:transparent}
+.slot.is-now + .slot{border-top-color:transparent}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.tag.place{border-color:var(--ink);color:var(--ink)}
+.tag.now{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tag.x3{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+
+/* Pruebas */
+.events{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.event{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+.event.wide{grid-column:1 / -1}
+.event-top{display:flex;align-items:baseline;gap:12px}
+.num{font-family:var(--display);font-weight:900;font-size:2.4rem;line-height:.8;color:var(--line);font-variant-numeric:tabular-nums;min-width:1.2ch}
+.event-top h3{flex:1}
+.event-top time{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.event.final{border:2px solid var(--gold)}
+.event.final .num{color:var(--gold)}
+.event dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.95rem}
+.event dt{font-weight:700;color:var(--muted);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+.event dd{margin:0;min-width:0}
+.steps{margin:0;padding-left:1.3rem;display:grid;gap:6px;font-size:.97rem}
+.tbl{overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:.95rem}
+.tbl th,.tbl td{text-align:left;padding:7px 10px 7px 0;border-top:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:0}
+.tbl td.c1{color:var(--rojo);font-weight:700} .tbl td.c2{color:var(--azul);font-weight:700}
+.tbl td.k{font-family:var(--display);font-weight:800;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.note{background:var(--gold-soft);border-radius:10px;padding:10px 12px;font-size:.93rem}
+.extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.extra{border:1px dashed var(--line);border-radius:14px;padding:16px;display:grid;gap:6px;align-content:start}
+.extra h3{font-size:1.3rem}
+.extra p{font-size:.95rem;color:var(--muted)}
+
+/* Equipos */
+.teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.team{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.team header{padding:14px 18px;color:var(--on-team);display:flex;justify-content:space-between;align-items:baseline}
+.team header h3{font-size:2rem;font-weight:900;text-transform:uppercase}
+.team header span{font-size:.9rem;font-weight:700}
+.team.t1 header{background:var(--rojo)} .team.t2 header{background:var(--azul)}
+.team ul{list-style:none;margin:0;padding:6px 18px 14px}
+.team li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.team li:first-child{border-top:0}
+.team li small{display:block;color:var(--muted);font-size:.85rem;line-height:1.3}
+.team .age{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* Preparativos */
+.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.list h3{font-size:1.35rem;text-transform:uppercase;margin-bottom:8px;letter-spacing:.04em}
+.list ul{list-style:none;margin:0;padding:0}
+.list li{border-top:1px solid var(--line)}
+.list label{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;cursor:pointer;font-size:.97rem}
+.list input{appearance:none;flex:none;width:20px;height:20px;margin-top:2px;border:2px solid var(--muted);border-radius:5px;display:grid;place-items:center;background:var(--surface);cursor:pointer}
+.list input:checked{background:var(--verde);border-color:var(--verde)}
+.list input:checked::after{content:"";width:5px;height:10px;border:solid var(--on-team);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.list input:checked+span{text-decoration:line-through;color:var(--muted)}
+.list input:disabled{cursor:default}
+.have{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+
+footer{padding-block:52px 40px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:20px}
+
+@media (max-width:820px){
+  .events,.teams,.extras{grid-template-columns:1fr}
+  .lists{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .res-row{grid-template-columns:2rem minmax(0,1fr)}
+  .res-row .seg{grid-column:2;justify-self:start}
+  .slot{grid-template-columns:56px 1fr;gap:12px;padding-inline:6px}
+  .slot time{font-size:1.35rem}
+  nav.top a{padding:13px 9px;font-size:1.05rem}
+}
+
+html,body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+img{max-width:100%}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Sábado 24 de octubre · Valldoreix</p>
+    <h1>Olimpiadas<br><span>Familiares</span></h1>
+    <ul class="facts">
+      <li><b>16:30 a 20:30</b>ocho pruebas</li>
+      <li><b>Javi</b>árbitro</li>
+      <li><b>18 °C</b>nublado, sin lluvia</li>
+      <li><b>18:57</b>se pone el sol</li>
+    </ul>
+    <div class="now-box" aria-live="polite">
+      <p class="eyebrow" id="now-label">Primera prueba</p>
+      <strong id="now-title">Relevo a las 16:30</strong>
+      <span id="now-next">Sábado 24 de octubre, en el jardín</span>
+    </div>
+  </div>
+  <div class="lanes" aria-hidden="true">
+    <div class="lane r"><b>1</b>Equipo 1</div>
+    <div class="lane a"><b>2</b>Equipo 2</div>
+  </div>
+</header>
+
+<nav class="top" aria-label="Secciones">
+  <div class="wrap">
+    <ul>
+      <li><a href="#marcador">Marcador</a></li>
+      <li><a href="#programa">Programa</a></li>
+      <li><a href="#pruebas">Pruebas</a></li>
+      <li><a href="#equipos">Equipos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section id="marcador">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Marcador</h2>
+      <p>Cada prueba vale un punto y la final, tres. Toca el equipo que gana cada prueba. Si te equivocas, vuelve a tocarlo y se borra. El marcador se guarda solo en el móvil de quien lo apunta, así que lo lleva Javi.</p>
+    </div>
+    <div class="board">
+      <div class="side t1"><p class="eyebrow">Equipo 1</p><b id="s1">0</b><small>Iñigo, Yago, Clara, Nico, Carol y Kiko</small></div>
+      <div class="side t2"><p class="eyebrow">Equipo 2</p><b id="s2">0</b><small>Pau, Alejandro, Ane, Patti, María, John y Papá</small></div>
+    </div>
+    <div class="board-meta">
+      <span id="lead">Empate a cero. Quedan <strong>10</strong> puntos en juego.</span>
+      <span class="pill" id="estado">Se guarda en este móvil</span>
+    </div>
+    <ol class="results" id="results">
+      <li class="res-row" data-prueba="relevo"><span class="n">1</span><span class="what"><b>Relevo</b><small>16:30 · Jardín</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="jenga"><span class="n">2</span><span class="what"><b>Jenga gigante</b><small>17:00 · Terraza</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="panuelo"><span class="n">3</span><span class="what"><b>Pañuelo</b><small>17:35 · Jardín</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="latas"><span class="n">4</span><span class="what"><b>Código de latas</b><small>17:55 · Jardín</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="domino"><span class="n">5</span><span class="what"><b>Dominó por parejas</b><small>18:30 · Arriba</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="cata"><span class="n">6</span><span class="what"><b>Cata de colas</b><small>19:00 · Arriba</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row" data-prueba="rondo"><span class="n">7</span><span class="what"><b>Rondo de ping pong</b><small>19:30 · Garaje</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row final" data-prueba="quiz"><span class="n">8</span><span class="what"><b>Gran final: quiz musical</b><small>20:00 · Arriba · vale 3 puntos</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+    </ol>
+    <p class="hint">Si al final hay empate, Javi pone una canción más y gana quien la acierta.</p>
+  </div>
+</section>
+
+<section id="programa">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Programa</h2>
+      <p>Lo de jardín acaba antes de que se vaya la luz. Después, merienda arriba, bajada al garaje y final arriba con las pizzas.</p>
+    </div>
+    <ol class="day" id="day">
+      <li class="slot" data-ini="16:30" data-fin="17:00" data-nombre="Relevo"><time>16:30</time><div class="slot-body"><h3>Relevo</h3><p>Seis postas, una pareja de rivales en cada una.</p><div class="tags"><span class="tag place">Jardín</span><span class="tag">25 min</span></div></div></li>
+      <li class="slot" data-ini="17:00" data-fin="17:35" data-nombre="Jenga gigante"><time>17:00</time><div class="slot-body"><h3>Jenga gigante</h3><p>Mientras, Javi monta el código de latas.</p><div class="tags"><span class="tag place">Terraza</span><span class="tag">30 min</span></div></div></li>
+      <li class="slot" data-ini="17:35" data-fin="17:55" data-nombre="Pañuelo"><time>17:35</time><div class="slot-body"><h3>Pañuelo</h3><div class="tags"><span class="tag place">Jardín</span><span class="tag">15 min</span></div></div></li>
+      <li class="slot" data-ini="17:55" data-fin="18:30" data-nombre="Código de latas"><time>17:55</time><div class="slot-body"><h3>Código de latas</h3><p>Última de jardín.</p><div class="tags"><span class="tag place">Jardín</span><span class="tag">30 min</span></div></div></li>
+      <li class="slot meal" data-ini="18:30" data-fin="19:00" data-nombre="Merienda y dominó"><time>18:30</time><div class="slot-body"><h3>Merienda y dominó por parejas</h3><p>Juegan cuatro y el resto merienda. Javi prepara la cata en la cocina.</p><div class="tags"><span class="tag place">Arriba</span><span class="tag">30 min</span></div></div></li>
+      <li class="slot" data-ini="19:00" data-fin="19:30" data-nombre="Cata de colas"><time>19:00</time><div class="slot-body"><h3>Cata de colas</h3><div class="tags"><span class="tag place">Arriba</span><span class="tag">25 min</span></div></div></li>
+      <li class="slot" data-ini="19:30" data-fin="20:00" data-nombre="Rondo de ping pong"><time>19:30</time><div class="slot-body"><h3>Rondo de ping pong</h3><div class="tags"><span class="tag place">Garaje</span><span class="tag">25 min</span></div></div></li>
+      <li class="slot final" data-ini="20:00" data-fin="20:30" data-nombre="Gran final: quiz musical"><time>20:00</time><div class="slot-body"><h3>Gran final: quiz musical</h3><div class="tags"><span class="tag place">Arriba</span><span class="tag x3">Vale 3 puntos</span><span class="tag">30 min</span></div></div></li>
+      <li class="slot meal" data-ini="20:30" data-fin="23:59" data-nombre="Medallas y pizzas"><time>20:30</time><div class="slot-body"><h3>Medallas y pizzas</h3><div class="tags"><span class="tag place">Arriba</span></div></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="pruebas">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pruebas</h2>
+      <p>Las reglas de cada una, para que Javi las tenga a mano. Todas son un duelo entre los dos equipos.</p>
+    </div>
+    <div class="events">
+
+      <article class="event wide">
+        <div class="event-top"><span class="num">1</span><h3>Relevo</h3><time>16:30</time></div>
+        <p>Seis postas encadenadas. En cada una compiten dos rivales de edad parecida, uno de cada equipo. Cuando uno acaba, choca la mano al siguiente de su equipo.</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Posta</th><th>Equipo 1</th><th>Equipo 2</th><th>Prueba</th></tr></thead>
+            <tbody>
+              <tr><td class="k">1</td><td class="c1">Iñigo</td><td class="c2">Pau</td><td>Carrera de sacos</td></tr>
+              <tr><td class="k">2</td><td class="c1">Yago</td><td class="c2">Alejandro</td><td>Huevo y cuchara. Si cae, se recoge y se sigue. Si es crudo y se rompe, se vuelve a empezar con otro.</td></tr>
+              <tr><td class="k">3</td><td class="c1">Clara</td><td class="c2">Patti</td><td>Tres canastas, cada una con su balón</td></tr>
+              <tr><td class="k">4</td><td class="c1">Carol</td><td class="c2">María</td><td>Voltear cinco vasos en una mesa, sin moverse del sitio</td></tr>
+              <tr><td class="k">5</td><td class="c1">Nico</td><td class="c2">Papá</td><td>Tres goles desde lejos, cada uno con un balón de distinto color</td></tr>
+              <tr><td class="k">6</td><td class="c1">Kiko</td><td class="c2">John</td><td>Pirámide de 6 vasos en la mesa de ping pong: gana el primero con una pelota en cada vaso</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <dl>
+          <dt>Gana</dt><dd>El equipo cuyo último relevista completa antes la pirámide</dd>
+          <dt>Montaje</dt><dd>Todo montado en la sobremesa. La mesa de los vasos, justo donde acaban las canastas. Nico y Papá esperan al lado de esa mesa, con la portería desde ahí. Kiko y John esperan junto a la portería y corren al garaje cuando su compañero mete el tercer gol.</dd>
+          <dt>Topes</dt><dd>Si a los 3 minutos alguien no lleva sus tres goles, se acerca un paso. Si a los 3 minutos no está la pirámide, se tira desde la mitad de la mesa.</dd>
+          <dt>Pirámide</dt><dd>Las dos pirámides juntas en un fondo de la mesa, con un poco de agua. Kiko y John tiran desde el otro fondo, con un cubo de unas 20 pelotas cada uno.</dd>
+          <dt>Javi</dt><dd>Devuelve los balones en la posta 5, para que Papá no tenga que ir a buscarlos.</dd>
+        </dl>
+        <p class="note">Ane no juega el relevo.</p>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">2</span><h3>Jenga gigante</h3><time>17:00</time></div>
+        <ol class="steps">
+          <li>Turnos alternos entre equipos. Dentro de cada equipo va rotando quién saca.</li>
+          <li>Se saca un bloque con una sola mano y se pone arriba. Cada turno tiene 20 segundos.</li>
+          <li>Pierde la torre el equipo que la tira.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>Al mejor de tres torres. Si vais justos de tiempo, una sola.</dd>
+          <dt>Dónde</dt><dd>En la terraza, o en el porche si se va la luz</dd>
+        </dl>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">3</span><h3>Pañuelo</h3><time>17:35</time></div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Número</th><th>Equipo 1</th><th>Equipo 2</th></tr></thead>
+            <tbody>
+              <tr><td class="k">1</td><td class="c1">Yago</td><td class="c2">Alejandro</td></tr>
+              <tr><td class="k">2</td><td class="c1">Clara</td><td class="c2">Patti</td></tr>
+              <tr><td class="k">3</td><td class="c1">Iñigo</td><td class="c2">Pau</td></tr>
+              <tr><td class="k">4</td><td class="c1">Kiko</td><td class="c2">John</td></tr>
+              <tr><td class="k">5</td><td class="c1">Nico</td><td class="c2">María, o Ane si ya está</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ol class="steps">
+          <li>Dos filas a unos 10 metros. Javi en medio con el pañuelo canta un número.</li>
+          <li>El que coge el pañuelo tiene que volver a su línea sin que le toquen.</li>
+          <li>Si vuelve, punto para su equipo. Si le tocan, punto para el otro. Quien pisa la línea del medio antes de tiempo regala el punto.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>El primero que llega a 7 puntos</dd>
+          <dt>No corren</dt><dd>Carol y Papá</dd>
+          <dt>Extra</dt><dd>De vez en cuando, Javi canta dos números a la vez</dd>
+        </dl>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">4</span><h3>Código de latas</h3><time>17:55</time></div>
+        <p>A unos 10 metros hay una mesa con 5 latas distintas en fila, tapadas con un cartón. Ese orden es el código. El equipo tiene en la salida las mismas 5 latas.</p>
+        <ol class="steps">
+          <li>Sale el primero, pone sus 5 latas en fila delante del cartón y Javi dice cuántas están en su sitio, sin decir cuáles.</li>
+          <li>Vuelve y choca la mano al siguiente, que solo puede intercambiar dos latas. Javi vuelve a decir cuántas.</li>
+          <li>Así hasta que Javi diga "cinco". Se para el reloj.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>El equipo que lo resuelve en menos tiempo. Máximo 8 minutos.</dd>
+          <dt>Orden</dt><dd>Un equipo detrás de otro. Javi cambia el código entre uno y otro, y el equipo que espera no mira.</dd>
+          <dt>En la salida</dt><dd>Se puede hablar. Papá no corre, pero puede decir qué cambio toca.</dd>
+          <dt>Hace falta</dt><dd>5 tipos de lata, 2 de cada. Un cartón, una mesa y un cronómetro.</dd>
+        </dl>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">5</span><h3>Dominó por parejas</h3><time>18:30</time></div>
+        <p>El de toda la vida, durante la merienda. Dos de cada equipo, sentados en cruz para que los compañeros queden enfrente.</p>
+        <ol class="steps">
+          <li>Siete fichas cada uno y no se roba. Sale el seis doble.</li>
+          <li>Gana la mano la pareja que se queda sin fichas. Si se cierra, la que suma menos puntos.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>La primera pareja en ganar dos manos</dd>
+          <dt>Juegan</dt><dd>2 por equipo. Papá, en la pareja del equipo 2.</dd>
+        </dl>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">6</span><h3>Cata de colas</h3><time>19:00</time></div>
+        <p>Diez rondas. En cada una, media lata para cada equipo, servida por Javi en la cocina. Hay que adivinar qué cola es.</p>
+        <ol class="steps">
+          <li>Cada equipo reparte su vaso en vasitos, prueba y debate un minuto.</li>
+          <li>Los dos escriben su respuesta y la enseñan a la vez, a la de tres.</li>
+          <li>Javi destapa la lata. Si aciertan los dos, punto para cada uno.</li>
+        </ol>
+        <dl>
+          <dt>Opciones</dt><dd>Coca-Cola, Coca-Cola Zero, Coca-Cola Light, Pepsi y, si la hay, cola de marca blanca</dd>
+          <dt>Gana</dt><dd>El que más acierta. Si empatan, una lata más.</dd>
+          <dt>Javi</dt><dd>Hay 3 latas de cada y elige 10 al azar, así nadie sabe el reparto. Todas en la nevera desde la mañana, tapadas y numeradas.</dd>
+          <dt>Entre rondas</dt><dd>Agua y un trozo de pan</dd>
+        </dl>
+      </article>
+
+      <article class="event">
+        <div class="event-top"><span class="num">7</span><h3>Rondo de ping pong</h3><time>19:30</time></div>
+        <p>Todos alrededor de la mesa con dos palas. Cada uno da un golpe y corre al otro lado. El que falla queda fuera.</p>
+        <ol class="steps">
+          <li>Cuando solo quedan dos, juegan un punto a muerte.</li>
+          <li>Gana la ronda el equipo del último que queda en pie.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>Dos rondas. Si cada equipo gana una, se juega una tercera.</dd>
+        </dl>
+      </article>
+
+      <article class="event final">
+        <div class="event-top"><span class="num">8</span><h3>Gran final: quiz musical</h3><time>20:00</time></div>
+        <p>Javi tiene una lista de 20 canciones muy conocidas, 5 de cada época: la de Papá, los 80 y 90, los 2000 y las de ahora. Va por épocas, empezando por las de Papá.</p>
+        <ol class="steps">
+          <li>Javi pone 10 segundos de cada canción.</li>
+          <li>En medio de la mesa hay una sartén y una cuchara de palo. Contesta el primero que la golpea.</li>
+          <li>El título da un punto y el cantante, otro. Si falla, rebota al otro equipo.</li>
+          <li>Cada persona puede golpear la sartén como mucho tres veces.</li>
+        </ol>
+        <dl>
+          <dt>Gana</dt><dd>El que suma más. Se lleva 3 puntos en el marcador.</dd>
+          <dt>Ojo</dt><dd>La lista solo la conoce Javi. Kiko juega.</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="extras">
+      <article class="extra">
+        <h3>Si sobra tiempo: Minuto para ganar</h3>
+        <p>Cinco retos de un minuto, uno de cada equipo a la vez: pirámide de 10 vasos, galleta de la frente a la boca, pelotas de ping pong en una huevera, tres globos en el aire con una mano y caja de pañuelos con pelotas atada a la cintura.</p>
+      </article>
+      <article class="extra">
+        <h3>Si sobra tiempo: tres en raya humano</h3>
+        <p>Nueve aros en el césped y 3 conos por equipo. Sale uno, deja su cono, vuelve y choca la mano al siguiente. Con los tres puestos, se mueven de uno en uno hasta hacer raya. Solo con luz.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="equipos">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Equipos</h2>
+      <p>Hechos por parejas de rivales de edad parecida. Javi arbitra y no juega.</p>
+    </div>
+    <div class="teams">
+      <article class="team t1">
+        <header><h3>Equipo 1</h3><span>6</span></header>
+        <ul>
+          <li><span>Iñigo</span></li>
+          <li><span>Clara</span></li>
+          <li><span>Yago<small>Viene del partido a las 15:00</small></span></li>
+          <li><span>Nico<small>El más pequeño</small></span></li>
+          <li><span>Carol<small>Hace las pruebas sin correr</small></span></li>
+          <li><span>Kiko</span></li>
+        </ul>
+      </article>
+      <article class="team t2">
+        <header><h3>Equipo 2</h3><span>7</span></header>
+        <ul>
+          <li><span>Ane<small>No juega el relevo</small></span></li>
+          <li><span>Patti</span></li>
+          <li><span>Pau</span></li>
+          <li><span>Alejandro<small>Viene del partido a las 15:00</small></span></li>
+          <li><span>María</span></li>
+          <li><span>John</span></li>
+          <li><span>Papá</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Actualizado el 23 de octubre de 2026.</p>
+    <p>Previsión para el sábado en Valldoreix: nublado, 18 °C a las 16:00 y 15 °C a las 20:00, sin lluvia.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var PRUEBAS = [
+    {id:"relevo", pts:1}, {id:"jenga", pts:1}, {id:"panuelo", pts:1}, {id:"latas", pts:1},
+    {id:"domino", pts:1}, {id:"cata", pts:1}, {id:"rondo", pts:1}, {id:"quiz", pts:3}
+  ];
+  var TOTAL = 10;
+  var LS_RES = "olimpiadas26-resultados", LS_PREP = "olimpiadas26-preparativos";
+  var state = { res: lsGet(LS_RES), prep: lsGet(LS_PREP) };
+  var db = null, mode = "local", canWrite = true;
+  var pending = {}, queued = {};
+
+  function lsGet(k){ try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
+  function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function $(id){ return document.getElementById(id); }
+
+  function renderScore(){
+    var s1 = 0, s2 = 0, used = 0;
+    PRUEBAS.forEach(function(p){
+      var g = state.res[p.id] || 0;
+      if (g === 1) { s1 += p.pts; used += p.pts; }
+      if (g === 2) { s2 += p.pts; used += p.pts; }
+      var row = document.querySelector('[data-prueba="' + p.id + '"]');
+      if (!row) return;
+      row.querySelectorAll("button[data-team]").forEach(function(b){
+        b.setAttribute("aria-pressed", String(g === Number(b.dataset.team)));
+        b.disabled = !canWrite;
+      });
+    });
+    $("s1").textContent = s1;
+    $("s2").textContent = s2;
+    var left = TOTAL - used, txt;
+    if (s1 === s2) txt = (s1 === 0 && used === 0) ? "Empate a cero." : "Empate a " + s1 + ".";
+    else txt = "Gana el equipo " + (s1 > s2 ? 1 : 2) + " por " + Math.abs(s1 - s2) + ".";
+    $("lead").innerHTML = "";
+    $("lead").append(txt + " ");
+    if (left > 0) {
+      $("lead").append("Quedan ");
+      var st = document.createElement("strong"); st.textContent = left; $("lead").append(st);
+      $("lead").append(left === 1 ? " punto en juego." : " puntos en juego.");
+    } else {
+      $("lead").append(s1 === s2 ? "Toca la canción de desempate." : "Se acabó.");
+    }
+  }
+
+  function renderPrep(){
+    document.querySelectorAll('.list input[type="checkbox"]').forEach(function(box){
+      box.checked = !!state.prep[box.id];
+      box.disabled = !canWrite;
+    });
+  }
+
+  function setStatus(kind){
+    var el = $("estado"), hint = $("prep-hint");
+    el.className = "pill";
+    if (kind === "shared") { el.textContent = "Se guarda para todos"; el.className = "pill ok"; if (hint) hint.textContent = "Las marcas se guardan para todos los que abren esta página."; }
+    else if (kind === "readonly") { el.textContent = "Solo lectura"; if (hint) hint.textContent = "Puedes ver las marcas, pero solo Kiko y Javi pueden cambiarlas."; }
+    else if (kind === "error") { el.textContent = "Sin conexión con el marcador"; }
+    else { el.textContent = "Se guarda en este móvil"; if (hint) hint.textContent = "Las marcas se guardan en este dispositivo."; }
+  }
+
+  async function writeDoc(path, body){
+    try { await db.doc(path).set(body); return true; }
+    catch (e) {
+      if (e && e.code === "invalid_argument") { canWrite = false; setStatus("readonly"); renderScore(); renderPrep(); }
+      return false;
+    }
+  }
+
+  async function setResult(id, v){
+    state.res[id] = v; renderScore();
+    if (mode !== "db") { lsSet(LS_RES, state.res); return; }
+    if (pending[id]) { queued[id] = v; return; }
+    pending[id] = true;
+    await writeDoc("resultados/" + id, { ganador: v });
+    pending[id] = false;
+    if (Object.prototype.hasOwnProperty.call(queued, id)) {
+      var q = queued[id]; delete queued[id];
+      if (q !== v) setResult(id, q);
+    }
+  }
+
+  async function setPrep(id, v){
+    state.prep[id] = v;
+    if (mode !== "db") { lsSet(LS_PREP, state.prep); return; }
+    if (pending["p:" + id]) { queued["p:" + id] = v; return; }
+    pending["p:" + id] = true;
+    await writeDoc("preparativos/" + id, { hecho: v });
+    pending["p:" + id] = false;
+    if (Object.prototype.hasOwnProperty.call(queued, "p:" + id)) {
+      var q = queued["p:" + id]; delete queued["p:" + id];
+      if (q !== v) setPrep(id, q);
+    }
+  }
+
+  $("results").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-team]");
+    if (!b || !canWrite) return;
+    var id = b.closest("[data-prueba]").dataset.prueba;
+    var team = Number(b.dataset.team);
+    var cur = state.res[id] || 0;
+    setResult(id, cur === team ? 0 : team);
+  });
+
+  document.querySelectorAll('.list input[type="checkbox"]').forEach(function(box){
+    box.addEventListener("change", function(){ if (canWrite) setPrep(box.id, box.checked); });
+  });
+
+  /* Ahora y siguiente */
+  function toMin(hhmm){ var p = hhmm.split(":"); return Number(p[0]) * 60 + Number(p[1]); }
+  function tick(){
+    var now = new Date();
+    var isDay = now.getFullYear() === 2026 && now.getMonth() === 9 && now.getDate() === 24;
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var slots = Array.prototype.slice.call(document.querySelectorAll("#day .slot"));
+    var cur = null, next = null;
+    slots.forEach(function(s){
+      s.classList.remove("is-now");
+      var old = s.querySelector(".tag.now"); if (old) old.remove();
+    });
+    if (isDay) {
+      slots.forEach(function(s, i){
+        if (mins >= toMin(s.dataset.ini) && mins < toMin(s.dataset.fin)) { cur = s; next = slots[i + 1] || null; }
+      });
+      if (!cur && mins < toMin(slots[0].dataset.ini)) next = slots[0];
+    }
+    var label = $("now-label"), title = $("now-title"), sub = $("now-next");
+    if (cur) {
+      cur.classList.add("is-now");
+      var chip = document.createElement("span"); chip.className = "tag now"; chip.textContent = "Ahora";
+      cur.querySelector(".tags").prepend(chip);
+      label.textContent = "Ahora";
+      title.textContent = cur.dataset.nombre;
+      sub.textContent = next ? "Siguiente: " + next.dataset.nombre + " a las " + next.dataset.ini : "Hasta la próxima edición";
+    } else if (isDay && next) {
+      label.textContent = "Hoy";
+      title.textContent = "Empieza a las " + next.dataset.ini;
+      sub.textContent = "Primera prueba: " + next.dataset.nombre + ", en el jardín";
+    } else if (now > new Date(2026, 9, 24, 23, 59)) {
+      label.textContent = "Edición 2026";
+      title.textContent = "Ya se jugó";
+      sub.textContent = "El marcador queda guardado abajo";
+    } else {
+      label.textContent = "Primera prueba";
+      title.textContent = "Relevo a las 16:30";
+      sub.textContent = "Sábado 24 de octubre, en el jardín";
+    }
+  }
+
+  renderScore(); renderPrep(); setStatus("local"); tick();
+  setInterval(tick, 30000);
+
+  /* Marcador compartido, si este visor lo permite */
+  (async function(){
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    var d = null;
+    try { d = await window.claude.use("db"); } catch (e) { d = null; }
+    if (!d) return;
+    db = d; mode = "db";
+    try {
+      var u = await window.claude.use("user");
+      if (u) { var c = await u.can("data.write"); if (c === false) canWrite = false; }
+    } catch (e) {}
+    state.res = {}; state.prep = {};
+    renderScore(); renderPrep();
+    setStatus(canWrite ? "shared" : "readonly");
+    db.collection("resultados").onSnapshot(function(snap){
+      var r = {};
+      snap.docs.forEach(function(doc){
+        var x = doc.data();
+        if (x && (x.ganador === 1 || x.ganador === 2)) r[doc.id] = x.ganador;
+      });
+      state.res = r; renderScore();
+    }, function(){ setStatus("error"); });
+    db.collection("preparativos").onSnapshot(function(snap){
+      var p = {};
+      snap.docs.forEach(function(doc){ var x = doc.data(); if (x && x.hecho === true) p[doc.id] = true; });
+      state.prep = p; renderPrep();
+    }, function(){ setStatus("error"); });
+  })();
+})();
+</script>
+
+</body>
+</html>
