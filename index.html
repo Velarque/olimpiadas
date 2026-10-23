@@ -196,6 +196,15 @@ html,body{margin:0}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 [hidden]{display:none!important}
 img{max-width:100%}
+
+.reservas-res{margin-top:14px;border-top:1px solid var(--line)}
+.reservas-res summary{cursor:pointer;padding:12px 0;font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.reservas-res .res-row:first-child{border-top:0}
+.res-row.reserva .n{font-size:1.4rem}
+.reserve-head{display:grid;gap:6px;margin-top:40px}
+.reserve-head h3{font-size:1.8rem;font-weight:900;text-transform:uppercase}
+.reserve-head p{color:var(--muted);max-width:62ch}
+.extra p b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -258,6 +267,15 @@ img{max-width:100%}
       <li class="res-row" data-prueba="rondo"><span class="n">7</span><span class="what"><b>Rondo de ping pong</b><small>19:30 · Garaje</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
       <li class="res-row final" data-prueba="quiz"><span class="n">8</span><span class="what"><b>Gran final: quiz musical</b><small>20:00 · Arriba · vale 3 puntos</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
     </ol>
+    <details class="reservas-res" id="reservas-res">
+      <summary>Pruebas de reserva, si se juegan</summary>
+      <ol class="results" id="results-reserva">
+      <li class="res-row reserva" data-prueba="r-raya"><span class="n">A</span><span class="what"><b>Tres en raya humano</b><small>Jardín, antes de las 19:00</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row reserva" data-prueba="r-bandeja"><span class="n">B</span><span class="what"><b>Memoria de bandeja</b><small>Arriba, a cualquier hora</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row reserva" data-prueba="r-minuto"><span class="n">C</span><span class="what"><b>Minuto para ganar</b><small>Arriba, a cualquier hora</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      <li class="res-row reserva" data-prueba="r-garaje"><span class="n">D</span><span class="what"><b>Futbolín por parejas</b><small>Garaje, después del rondo</small></span><span class="seg"><button type="button" data-team="1" aria-pressed="false">Equipo 1</button><button type="button" data-team="2" aria-pressed="false">Equipo 2</button></span></li>
+      </ol>
+    </details>
     <p class="hint">Si al final hay empate, Javi pone una canción más y gana quien la acierta.</p>
   </div>
 </section>
@@ -428,14 +446,34 @@ img{max-width:100%}
       </article>
     </div>
 
+    <div class="reserve-head">
+      <h3>Pruebas de reserva</h3>
+      <p>Si las pruebas van más rápido de lo previsto, se mete una de estas en el hueco. Cada una vale un punto, como las demás. Elige según la hora y dónde estéis.</p>
+    </div>
     <div class="extras">
       <article class="extra">
-        <h3>Si sobra tiempo: Minuto para ganar</h3>
-        <p>Cinco retos de un minuto, uno de cada equipo a la vez: pirámide de 10 vasos, galleta de la frente a la boca, pelotas de ping pong en una huevera, tres globos en el aire con una mano y caja de pañuelos con pelotas atada a la cintura.</p>
+        <p class="eyebrow">A · Jardín · solo con luz, antes de las 19:00 · 15 min</p>
+        <h3>Tres en raya humano</h3>
+        <p>Una cuadrícula de 3 por 3 pintada con tiza o marcada con cuerda, y 3 objetos por equipo, cada equipo de un color. Sale uno, deja su objeto en una casilla, vuelve y choca la mano al siguiente. Con los tres puestos, se mueven de uno en uno hasta hacer raya. Al mejor de tres.</p>
+        <p><b>Hace falta:</b> tiza o cuerda, y 6 objetos, 3 de cada color.</p>
       </article>
       <article class="extra">
-        <h3>Si sobra tiempo: tres en raya humano</h3>
-        <p>Nueve aros en el césped y 3 conos por equipo. Sale uno, deja su cono, vuelve y choca la mano al siguiente. Con los tres puestos, se mueven de uno en uno hasta hacer raya. Solo con luz.</p>
+        <p class="eyebrow">B · Arriba · a cualquier hora · 10 min</p>
+        <h3>Memoria de bandeja</h3>
+        <p>Javi pone 20 objetos de la casa en una bandeja y la deja ver un minuto. La tapa, y cada equipo tiene dos minutos para escribir todos los que recuerda. En la segunda ronda Javi cambia o quita tres cosas, y cada equipo escribe qué ha cambiado. Un punto por acierto, y gana quien suma más.</p>
+        <p><b>Hace falta:</b> nada, lo que haya en casa.</p>
+      </article>
+      <article class="extra">
+        <p class="eyebrow">C · Arriba · a cualquier hora · 20 min</p>
+        <h3>Minuto para ganar</h3>
+        <p>Cinco retos de un minuto, uno de cada equipo a la vez: pirámide de 10 vasos, galleta de la frente a la boca sin manos, pelotas de ping pong botando en una huevera, tres globos en el aire con una mano y caja de pañuelos con pelotas atada a la cintura. Gana quien se lleva más retos.</p>
+        <p><b>Hace falta:</b> galletas, globos y una caja de pañuelos vacía. Vasos, pelotas y huevera ya los hay.</p>
+      </article>
+      <article class="extra">
+        <p class="eyebrow">D · Garaje · después del rondo · 10 min</p>
+        <h3>Futbolín por parejas</h3>
+        <p>Dos contra dos, a 5 goles. Ya estáis en el garaje y no hay que montar nada. Si sobra más, billar a bola 8 rápida por parejas: gana la primera que mete cuatro bolas de las suyas.</p>
+        <p><b>Hace falta:</b> nada.</p>
       </article>
     </div>
   </div>
@@ -488,7 +526,9 @@ img{max-width:100%}
 (function(){
   var PRUEBAS = [
     {id:"relevo", pts:1}, {id:"jenga", pts:1}, {id:"panuelo", pts:1}, {id:"latas", pts:1},
-    {id:"domino", pts:1}, {id:"cata", pts:1}, {id:"rondo", pts:1}, {id:"quiz", pts:3}
+    {id:"domino", pts:1}, {id:"cata", pts:1}, {id:"rondo", pts:1}, {id:"quiz", pts:3},
+    {id:"r-raya", pts:1, reserva:true}, {id:"r-bandeja", pts:1, reserva:true},
+    {id:"r-minuto", pts:1, reserva:true}, {id:"r-garaje", pts:1, reserva:true}
   ];
   var TOTAL = 10;
   var LS_RES = "olimpiadas26-resultados", LS_PREP = "olimpiadas26-preparativos";
@@ -504,8 +544,8 @@ img{max-width:100%}
     var s1 = 0, s2 = 0, used = 0;
     PRUEBAS.forEach(function(p){
       var g = state.res[p.id] || 0;
-      if (g === 1) { s1 += p.pts; used += p.pts; }
-      if (g === 2) { s2 += p.pts; used += p.pts; }
+      if (g === 1) { s1 += p.pts; if (!p.reserva) used += p.pts; }
+      if (g === 2) { s2 += p.pts; if (!p.reserva) used += p.pts; }
       var row = document.querySelector('[data-prueba="' + p.id + '"]');
       if (!row) return;
       row.querySelectorAll("button[data-team]").forEach(function(b){
@@ -513,6 +553,8 @@ img{max-width:100%}
         b.disabled = !canWrite;
       });
     });
+    var anyRes = PRUEBAS.some(function(p){ return p.reserva && state.res[p.id]; });
+    if (anyRes && $("reservas-res")) $("reservas-res").open = true;
     $("s1").textContent = s1;
     $("s2").textContent = s2;
     var left = TOTAL - used, txt;
@@ -579,13 +621,15 @@ img{max-width:100%}
     }
   }
 
-  $("results").addEventListener("click", function(ev){
-    var b = ev.target.closest("button[data-team]");
-    if (!b || !canWrite) return;
-    var id = b.closest("[data-prueba]").dataset.prueba;
-    var team = Number(b.dataset.team);
-    var cur = state.res[id] || 0;
-    setResult(id, cur === team ? 0 : team);
+  document.querySelectorAll(".results").forEach(function(list){
+    list.addEventListener("click", function(ev){
+      var b = ev.target.closest("button[data-team]");
+      if (!b || !canWrite) return;
+      var id = b.closest("[data-prueba]").dataset.prueba;
+      var team = Number(b.dataset.team);
+      var cur = state.res[id] || 0;
+      setResult(id, cur === team ? 0 : team);
+    });
   });
 
   document.querySelectorAll('.list input[type="checkbox"]').forEach(function(box){
